@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // var foo = {
+        //     value: 1
+        // };
+
+        // function bar() {
+        //     console.log(this.value);
+        // }
+
+        // bar.call(foo); // 1
+
+        // Function.prototype.call2 = function (context) {
+        //     context.fn = this;
+        //     context.fn();
+        //     delete context.fn;
+        // }
+
+        // var foo = {
+        //     value: 1
+        // };
+
+        // function bar() {
+        //     console.log(this.value);
+        // };
+
+        // bar.call2(foo);
+
+        // var foo = {
+        //     value: 1
+        // };
+
+        // function bar(name, age) {
+        //     console.log(name);
+        //     console.log(age);
+        //     console.log(this.value);
+        // };
+
+        // bar.call(foo, 'jack', 18);
+
+        Function.prototype.apply2 = function (context, arr) {
+            console.log("arr", arr)
+            var context = Object(context) || window;
+            context.fn = this;
+
+            var result;
+            if (!arr) {
+                result = context.fn();
+            }
+            else {
+                var args = [];
+                for (var i = 0, len = arr.length; i < len; i++) {
+                    args.push(arr[i]);
+                }
+                // result = context.fn(...arr);
+                result = eval('context.fn(' + args + ')')
+            }
+
+            delete context.fn
+            return result;
+        }
+
+        var foo = {
+            value: 1
+        }
+
+        function bar(a, b, c) {
+            return {
+                value: this.value,
+                a,
+                b,
+                c
+            }
+        }
+        var values = [1, 2, 3];
+        console.log(bar.apply2(foo, values))
+    </script>
+</body>
+
+</html>
