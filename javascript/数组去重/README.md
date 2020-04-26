@@ -122,7 +122,7 @@ console.log(res);
 ## Set
 
 ```javascript
-var array = [1, 1, 2, 3, 4,'1', '2', '1', NaN, NaN, {a:1}, {a:1}];
+var array = [1, 1, 2, 3, 4,'1', '2', '1', NaN, NaN {a:1}, {a:1}];
 console.log([...new Set(array)])
 ```
 
